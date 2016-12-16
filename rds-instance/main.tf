@@ -20,10 +20,6 @@ variable "subnet_ids" {
   type = "list"
 }
 
-variable "availability_zone" {
-  description = "The availability zone"
-}
-
 variable "allocated_storage" {
   description = "The allocated storage in gigabytes"
 }
@@ -113,7 +109,6 @@ resource "aws_db_subnet_group" "main" {
 
 resource "aws_db_instance" "main" {
   allocated_storage       = "${var.allocated_storage}"
-  availability_zone       = "${var.availability_zone}"
   multi_az                = "${var.multi_az}"
   backup_retention_period = "${var.backup_retention_period}"
   backup_window           = "${var.preferred_backup_window}"
