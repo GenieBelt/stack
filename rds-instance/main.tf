@@ -55,6 +55,11 @@ variable "preferred_backup_window" {
   default     = "07:00-09:00"
 }
 
+variable "multi_az" {
+  description = "Specifies if the RDS instance is multi-AZ"
+  default = false
+}
+
 variable "backup_retention_period" {
   description = "The backup retention period"
   default     = 5
@@ -109,6 +114,7 @@ resource "aws_db_subnet_group" "main" {
 resource "aws_db_instance" "main" {
   allocated_storage       = "${var.allocated_storage}"
   availability_zone       = "${var.availability_zone}"
+  multi_az                = "${var.multi_az}"
   backup_retention_period = "${var.backup_retention_period}"
   preferred_backup_window = "${var.preferred_backup_window}"
   db_subnet_group_name    = "${aws_db_subnet_group.main.id}"
