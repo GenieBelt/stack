@@ -107,16 +107,16 @@ variable "tags" {
 
 
 
-resource "aws_elasticache_cluster" "bar" {
-    apply_immediately = "false"
-    cluster_id = "redis-cluster-example-id"
+resource "aws_elasticache_cluster" "main" {
+    apply_immediately = "${var.apply_immediately}"
+    cluster_id = "${var.cluster_id}"
 
     engine = "${var.engine}"
     port = "${var.port}"
     num_cache_nodes = "${var.num_cache_nodes}"
     parameter_group_name = "${var.parameter_group_name}"
 
-    node_type = "cache.t2.micro"
+    node_type = "${var.node_type}"
 
     tags {
     	 Name        = "Elasticache cluster (${var.cluster_id})"
