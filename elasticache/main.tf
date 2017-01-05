@@ -1,3 +1,7 @@
+variable "environment" {
+  description = "The environment tag, e.g prod"
+}
+
 variable "cluster_id" {
 	 description = "(Required) Group identifier. ElastiCache converts this name to lowercase"
 }
@@ -115,7 +119,7 @@ resource "aws_elasticache_cluster" "bar" {
     node_type = "cache.t2.micro"
 
     tags {
-    	 Name        = "Elasticache cluster (${var.name})"
+    	 Name        = "Elasticache cluster (${var.cluster_id})"
     	 Environment = "${var.environment}"
     }
 
