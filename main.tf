@@ -321,5 +321,8 @@ output "external_route_tables" {
 }
 
 output "internal_security_groups" {
-  value = ["${aws_security_group.internal_elb.id}", "${aws_security_group.external_elb.id}", "${aws_security_group.internal_ssh.id}", "${aws_security_group.external_ssh.id}" ]
+  value = ["${module.security_groups.internal_elb}",
+           "${module.security_groups.external_elb}",
+           "${module.security_groups.internal_ssh}",
+           "${module.security_groups.external_ssh}" ]
 }
