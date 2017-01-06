@@ -1,4 +1,4 @@
-variable "environment" {
+securityvariable "environment" {
   description = "The environment tag, e.g prod"
 }
 
@@ -10,8 +10,8 @@ variable "zone_id" {
   description = "The Route53 Zone ID where the DNS record will be created"
 }
 
-variable "security_groups" {
-  description = "A list of security group IDs"
+variable "access_from_security_groups" {
+  description = "A list of security group IDs that can access the rds"
   type = "list"
 }
 
