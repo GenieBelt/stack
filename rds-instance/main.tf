@@ -89,7 +89,7 @@ resource "aws_security_group" "main" {
     from_port       = "${var.port}"
     to_port         = "${var.port}"
     protocol        = "TCP"
-    security_groups = ["${var.security_groups}"]
+    security_groups = ["${var.access_from_security_groups}"]
   }
 
   egress {
