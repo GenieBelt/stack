@@ -319,3 +319,7 @@ output "internal_route_tables" {
 output "external_route_tables" {
   value = "${module.vpc.external_rtb_id}"
 }
+
+output "internal_security_groups" {
+  value = ["${aws_security_group.internal_elb.id}", "${aws_security_group.external_elb.id}", "${aws_security_group.internal_ssh.id}", "${aws_security_group.external_ssh.id}" ]
+}
