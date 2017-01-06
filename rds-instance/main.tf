@@ -1,6 +1,6 @@
-variable "pg_extension" {
+/* variable "pg_extension" {
   description = "Extension to postgres" // TODO extend to list
-}
+} */
 
 variable "environment" {
   description = "The environment tag, e.g prod"
@@ -128,9 +128,9 @@ resource "aws_db_instance" "main" {
   port                    = "${var.port}"
 }
 
-resource "postgresql_extension" "my_extension" {
+/* resource "postgresql_extension" "my_extension" {
   name = "${var.pg_extension}"
-}
+} */
 
 
 resource "aws_route53_record" "main" {
