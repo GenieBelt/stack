@@ -1,3 +1,7 @@
+variable "pg_extension" {
+  description = "Extension to postgres" // TODO extend to list
+}
+
 variable "environment" {
   description = "The environment tag, e.g prod"
 }
@@ -124,7 +128,12 @@ resource "aws_db_instance" "main" {
   port                    = "${var.port}"
 }
 
-resource "aws_route53_record" "main" {
+resource "postgresql_extension" "my_extension" {
+  name = "${var.pg_extension}"
+}
+
+
+Resource "aws_route53_record" "main" {
   zone_id = "${var.zone_id}"
   name    = "${coalesce(var.dns_name, var.database_name)}"
   type    = "CNAME"
