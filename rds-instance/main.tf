@@ -133,7 +133,7 @@ resource "postgresql_extension" "my_extension" {
 }
 
 
-Resource "aws_route53_record" "main" {
+resource "aws_route53_record" "main" {
   zone_id = "${var.zone_id}"
   name    = "${coalesce(var.dns_name, var.database_name)}"
   type    = "CNAME"
