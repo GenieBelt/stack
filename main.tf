@@ -250,7 +250,7 @@ output "external_elb" {
   value = "${module.security_groups.external_elb}"
 }
 
-// Comma separated list of internal subnet IDs.
+// Comma separated list of internal subnet IDs. -- think it is a list now?
 output "internal_subnets" {
   value = "${module.vpc.internal_subnets}"
 }
