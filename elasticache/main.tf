@@ -46,7 +46,7 @@ variable subnet_group_name {
 }
 
 variable security_group_names {
-	 description = "Optional, EC2 Classic only List of security group names to associate with this cache cluster"	 
+	 description = "Optional, EC2 Classic only List of security group names to associate with this cache cluster"
 	 default = ""
 }
 
@@ -103,6 +103,17 @@ variable "availability_zones" {
 variable "tags" {
 	 description = "Optional A mapping of tags to assign to the resource"
 	 default = ""
+}
+
+resource "aws_elasticache_replication_group" "main" {
+  replication_group_id          = "tf-replication-group-1"
+  replication_group_description = "test description"
+  node_type                     = "cache.m1.small"
+  number_cache_clusters         = 2
+  port                          = "${var.port}"
+  parameter_group_name          = "default.redis2.8"
+  availability_zones            = ["eu-central-1a", "eu-central-1b"]
+  automatic_failover_enabled    = true
 }
 
 
