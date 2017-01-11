@@ -10,8 +10,7 @@ variable "cluster_id" {
 }
 
 variable "engine" {
-	 description = "Required Name of the cache engine to be used for this cache
-	 cluster. Valid values for this parameter are memcached or redis"
+	 description = "Required Name of the cache engine to be used for this cache cluster. Valid values for this parameter are memcached or redis"
 	 default = "redis"
 }
 
