@@ -150,7 +150,7 @@ resource "aws_elasticache_cluster" "main" {
     }
 
 }
-
+/*
 resource "aws_route53_record" "main" {
   zone_id = "${var.zone_id}"
   name    = "${var.dns_name}"
@@ -158,3 +158,4 @@ resource "aws_route53_record" "main" {
   ttl     = 300
   records = ["${aws_elasticache_cluster.main.endpoint}"]
 }
+*/
