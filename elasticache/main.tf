@@ -108,6 +108,7 @@ variable "tags" {
 	 default = ""
 }
 
+/*
 variable "dns_name" {
 	 description = "ElastiCache dns name"
 	 default = "redis-nikolaj"
@@ -116,6 +117,7 @@ variable "dns_name" {
 variable "zone_id" {
   description = "The Route53 Zone ID where the DNS record will be created"
 }
+*/
 
 /*******************************************************************************
  * resources
