@@ -153,7 +153,7 @@ resource "aws_elasticache_cluster" "main" {
 
 resource "aws_route53_record" "main" {
   zone_id = "${var.zone_id}"
-  name    = "${coalesce(var.dns_name, var.name)}"
+  name    = "${var.dns_name}"
   type    = "CNAME"
   ttl     = 300
   records = ["${aws_elasticache_cluster.main.endpoint}"]
