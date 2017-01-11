@@ -1,3 +1,6 @@
+/*******************************************************************************
+ * Variables
+ ******************************************************************************/
 variable "environment" {
   description = "The environment tag, e.g prod"
 }
@@ -7,7 +10,8 @@ variable "cluster_id" {
 }
 
 variable "engine" {
-	 description = "Required Name of the cache engine to be used for this cache cluster. Valid values for this parameter are memcached or redis"
+	 description = "Required Name of the cache engine to be used for this cache
+	 cluster. Valid values for this parameter are memcached or redis"
 	 default = "redis"
 }
 
@@ -104,7 +108,9 @@ variable "tags" {
 	 description = "Optional A mapping of tags to assign to the resource"
 	 default = ""
 }
-
+/*******************************************************************************
+ * resources
+ ******************************************************************************
 resource "aws_elasticache_replication_group" "main" {
   replication_group_id          = "tf-replication-group-1"
   replication_group_description = "test description"
@@ -116,7 +122,7 @@ resource "aws_elasticache_replication_group" "main" {
   automatic_failover_enabled    = true
 }
 
-
+*/
 
 resource "aws_elasticache_cluster" "main" {
     apply_immediately = "${var.apply_immediately}"

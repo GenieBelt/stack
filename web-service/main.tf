@@ -81,9 +81,9 @@ variable "internal_zone_id" {
   description = "The zone ID to create the record in"
 }
 
-/**
+/*******************************************************************************
  * Options.
- */
+ ******************************************************************************/
 
 variable "healthcheck" {
   description = "Path to a healthcheck endpoint"
@@ -130,9 +130,9 @@ variable "deployment_maximum_percent" {
   default     = 200
 }
 
-/**
+/*******************************************************************************
  * Resources.
- */
+ *******************************************************************************/
 
 resource "aws_ecs_service" "main" {
   name                               = "${module.task.name}"
@@ -192,9 +192,9 @@ module "elb" {
   ssl_certificate_id = "${var.ssl_certificate_id}"
 }
 
-/**
+/*******************************************************************************
  * Outputs.
- */
+ *******************************************************************************/
 
 // The name of the ELB
 output "name" {
