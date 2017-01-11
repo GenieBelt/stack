@@ -108,6 +108,16 @@ variable "tags" {
 	 description = "Optional A mapping of tags to assign to the resource"
 	 default = ""
 }
+
+variable "dns_name" {
+	 description = "ElastiCache dns name"
+	 default = "redis-nikolaj"
+}
+
+variable "zone_id" {
+  description = "The Route53 Zone ID where the DNS record will be created"
+}
+
 /*******************************************************************************
  * resources
  ******************************************************************************
@@ -140,4 +150,12 @@ resource "aws_elasticache_cluster" "main" {
     	 Environment = "${var.environment}"
     }
 
+}
+
+resource "aws_route53_record" "main" {
+  zone_id = "${var.zone_id}"
+  name    = "${coalesce(var.dns_name, var.name)}"
+  type    = "CNAME"
+  ttl     = 300
+  records = ["${aws_elasticache_cluster.main.endpoint}"]
 }
