@@ -146,10 +146,11 @@ resource "aws_elasticache_cluster" "main" {
 
     node_type = "${var.node_type}"
 
-    tags {
+/*    tags {
     	 Name        = "Elasticache cluster (${var.cluster_id})"
     	 Environment = "${var.environment}"
     }
+*/
 
 }
 /*
