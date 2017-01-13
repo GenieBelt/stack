@@ -162,3 +162,7 @@ resource "aws_route53_record" "main" {
   records = ["${aws_elasticache_cluster.main.endpoint}"]
 }
 */
+
+output "endpoint" {
+  value = "${aws_elasticache_cluster.main.endpoint}"  
+}
