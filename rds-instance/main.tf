@@ -102,6 +102,11 @@ variable "skip_final_snapshot" {
 variable "copy_tags_to_snapshot" {
   default = ""
 }
+
+variable "apply_immediately" {
+  default = "true"
+}
+
 /*******************************************************************************
  * Ressources
  ******************************************************************************/
@@ -155,6 +160,7 @@ resource "aws_db_instance" "main" {
   storage_encrypted       = "${var.storage_encrypted}"
   skip_final_snapshot     = "${var.skip_final_snapshot}"
   copy_tags_to_snapshot   = "${var.copy_tags_to_snapshot}"
+  apply_immediately       = "${var.apply_immediately}"
 }
 
 /* resource "postgresql_extension" "my_extension" {
