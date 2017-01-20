@@ -1,3 +1,7 @@
+/*******************************************************************************
+ * Variables
+ ******************************************************************************/
+
 /* variable "pg_extension" {
   description = "Extension to postgres" // TODO extend to list
 } */
@@ -86,8 +90,12 @@ variable "port" {
 
 variable "final_snapshot_identifier" {
   default = "when done experimenting set this var, to make snapshots when deleting instance"
+  default = ""
 }
 
+/*******************************************************************************
+ * Ressources
+ ******************************************************************************/
 resource "aws_security_group" "main" {
   name        = "${var.name-db-instance}-rds-instance"
   description = "Allows traffic to rds from other security groups"
@@ -135,6 +143,7 @@ resource "aws_db_instance" "main" {
   db_subnet_group_name    = "${aws_db_subnet_group.main.id}"
   port                    = "${var.port}"
   final_snapshot_identifier = "${var.final_snapshot_identifier}"
+
 }
 
 /* resource "postgresql_extension" "my_extension" {
@@ -149,6 +158,10 @@ resource "aws_route53_record" "main" {
   ttl     = 300
   records = ["${aws_db_instance.main.endpoint}"]
 }
+
+/*******************************************************************************
+ * Outputs
+ ******************************************************************************/
 
 // The instance identifier.
 output "id" {
