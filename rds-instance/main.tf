@@ -77,7 +77,6 @@ variable "dns_name" {
 
 variable "multi_az" {
   default = "true or false flag for multi availability zone"
-  default = true
 }
 
 variable "port" {
