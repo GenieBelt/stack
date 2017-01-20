@@ -28,7 +28,7 @@ variable "allocated_storage" {
   description = "The allocated storage in gigabytes"
 }
 
-variable "database_name" {
+variable "name-db-instance" {
   description = "The database name"
 }
 
@@ -75,13 +75,22 @@ variable "dns_name" {
   default     = ""
 }
 
+variable "multi_az" {
+  default = "true or false flag for multi availability zone"
+  default = true
+}
+
 variable "port" {
   description = "The port at which the database listens for incoming connections"
   default     = 3306
 }
 
+variable "final_snapshot_identifier" {
+  default = "when done experimenting set this var, to make snapshots when deleting instance"
+}
+
 resource "aws_security_group" "main" {
-  name        = "${var.database_name}-rds-instance"
+  name        = "${var.name-db-instance}-rds-instance"
   description = "Allows traffic to rds from other security groups"
   vpc_id      = "${var.vpc_id}"
 
@@ -100,13 +109,13 @@ resource "aws_security_group" "main" {
   }
 
   tags {
-    Name        = "RDS instance (${var.database_name})"
+    Name        = "RDS instance (${var.name-db-instance})"
     Environment = "${var.environment}"
   }
 }
 
 resource "aws_db_subnet_group" "main" {
-  name        = "${var.database_name}"
+  name        = "${var.name-db-instance}"
   description = "RDS instance subnet group"
   subnet_ids  = ["${var.subnet_ids}"]
 }
@@ -119,13 +128,14 @@ resource "aws_db_instance" "main" {
   db_subnet_group_name    = "${aws_db_subnet_group.main.id}"
   engine                  = "${var.engine}"
   instance_class          = "${var.instance_type}"
-  name                    = "${var.database_name}"
+  name                    = "${var.name-db-instance}"
   username                = "${var.username}"
   password                = "${var.password}"
   publicly_accessible     = "${var.publicly_accessible}"
   vpc_security_group_ids  = ["${aws_security_group.main.id}"]
   db_subnet_group_name    = "${aws_db_subnet_group.main.id}"
   port                    = "${var.port}"
+  final_snapshot_identifier = "${var.final_snapshot_identifier}"
 }
 
 /* resource "postgresql_extension" "my_extension" {
@@ -135,7 +145,7 @@ resource "aws_db_instance" "main" {
 
 resource "aws_route53_record" "main" {
   zone_id = "${var.zone_id}"
-  name    = "${coalesce(var.dns_name, var.database_name)}"
+  name    = "${coalesce(var.dns_name, var.name-db-instance)}"
   type    = "CNAME"
   ttl     = 300
   records = ["${aws_db_instance.main.endpoint}"]
