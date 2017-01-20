@@ -85,8 +85,13 @@ variable "port" {
 }
 
 variable "final_snapshot_identifier" {
-  default = "when done experimenting set this var, to make snapshots when deleting instance"
+  description = "when done experimenting set this var, to make snapshots when deleting instance"
   default = ""
+}
+
+variable "storage_encrypted" {
+  description = "true if storage is encrypted"
+  default = "false"
 }
 
 /*******************************************************************************
@@ -139,7 +144,7 @@ resource "aws_db_instance" "main" {
   db_subnet_group_name    = "${aws_db_subnet_group.main.id}"
   port                    = "${var.port}"
   final_snapshot_identifier = "${var.final_snapshot_identifier}"
-
+  storage_encrypted       = "${var.storage_encrypted}"
 }
 
 /* resource "postgresql_extension" "my_extension" {
