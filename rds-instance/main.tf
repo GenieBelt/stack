@@ -59,11 +59,6 @@ variable "preferred_backup_window" {
   default     = "07:00-09:00"
 }
 
-variable "multi_az" {
-  description = "Specifies if the RDS instance is multi-AZ"
-  default = false
-}
-
 variable "backup_retention_period" {
   description = "The backup retention period"
   default     = 5
@@ -81,6 +76,7 @@ variable "dns_name" {
 
 variable "multi_az" {
   default = "true or false flag for multi availability zone"
+  default = false
 }
 
 variable "port" {
