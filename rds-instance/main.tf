@@ -94,6 +94,14 @@ variable "storage_encrypted" {
   default = "false"
 }
 
+variable "skip_final_snapshot" {
+  description = "set to false to make snapshot before deleting instance"
+  default = ""
+}
+
+variable "copy_tags_to_snapshot" {
+  default = ""
+}
 /*******************************************************************************
  * Ressources
  ******************************************************************************/
@@ -145,6 +153,8 @@ resource "aws_db_instance" "main" {
   port                    = "${var.port}"
   final_snapshot_identifier = "${var.final_snapshot_identifier}"
   storage_encrypted       = "${var.storage_encrypted}"
+  skip_final_snapshot     = "${var.skip_final_snapshot}"
+  copy_tags_to_snapshot   = "${var.copy_tags_to_snapshot}"
 }
 
 /* resource "postgresql_extension" "my_extension" {
