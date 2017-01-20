@@ -107,6 +107,10 @@ variable "apply_immediately" {
   default = "true"
 }
 
+variable "replicate_source_db" {
+  description = "if present become replicate read only db"
+  default = ""
+}
 /*******************************************************************************
  * Ressources
  ******************************************************************************/
@@ -161,6 +165,7 @@ resource "aws_db_instance" "main" {
   skip_final_snapshot     = "${var.skip_final_snapshot}"
   copy_tags_to_snapshot   = "${var.copy_tags_to_snapshot}"
   apply_immediately       = "${var.apply_immediately}"
+  replicate_source_db     = "${var.replicate_source_db}"
 }
 
 /* resource "postgresql_extension" "my_extension" {
