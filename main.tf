@@ -324,5 +324,7 @@ output "internal_security_groups" {
   value = ["${module.security_groups.internal_elb}",
            "${module.security_groups.external_elb}",
            "${module.security_groups.internal_ssh}",
-           "${module.security_groups.external_ssh}" ]
+           "${module.security_groups.external_ssh}",
+           "${module.ecs_cluster.security_group_id}"]
+}]
 }
