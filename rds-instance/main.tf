@@ -120,10 +120,10 @@ resource "aws_security_group" "main" {
   vpc_id      = "${var.vpc_id}"
 
   ingress {
-    from_port       = "${var.port}"
-    to_port         = "${var.port}"
-    protocol        = "TCP"
-    security_groups = ["${var.access_from_security_groups}"]
+    from_port       = 0
+    to_port         = 0
+    protocol        = -1
+    security_groups = ["${split(",",var.access_from_security_groups)}"]
   }
 
   egress {
@@ -178,7 +178,7 @@ resource "aws_route53_record" "main" {
   name    = "${coalesce(var.dns_name, var.name-db-instance)}"
   type    = "CNAME"
   ttl     = 300
-  records = ["${aws_db_instance.main.endpoint}"]
+  records = ["${aws_db_instance.main.address}"]
 }
 
 /*******************************************************************************
