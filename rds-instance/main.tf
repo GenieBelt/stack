@@ -18,9 +18,15 @@ variable "zone_id" {
   description = "The Route53 Zone ID where the DNS record will be created"
 }
 
+/*
 variable "access_from_security_groups" {
   description = "A list of security group IDs that can access the rds"
   type = "list"
+}
+*/
+
+variable "access_from_security_groups" {
+  description = "A list of security group IDs that can access the rds"
 }
 
 variable "subnet_ids" {
