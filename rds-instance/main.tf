@@ -123,7 +123,7 @@ resource "aws_security_group" "main" {
     from_port       = 0
     to_port         = 0
     protocol        = -1
-    security_groups = "${var.access_from_security_groups}"
+    security_groups = ["$(split(",", var.access_from_security_groups})"]
   }
 
   egress {
