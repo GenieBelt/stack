@@ -326,5 +326,4 @@ output "internal_security_groups" {
            "${module.security_groups.internal_ssh}",
            "${module.security_groups.external_ssh}",
            "${module.ecs_cluster.security_group_id}"]
-}]
 }
