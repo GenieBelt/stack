@@ -242,7 +242,13 @@ output "zone_id" {
 
 // Security group for internal ELBs.
 output "internal_elb" {
-  value = "${module.security_groups.internal_elb}"
+  #value = "${module.security_groups.internal_elb}"
+  # The below is a hack to try to determine why the services are not launching within docker.
+  value = ["${module.security_groups.internal_elb}",
+           "${module.security_groups.external_elb}",
+           "${module.security_groups.internal_ssh}",
+           "${module.security_groups.external_ssh}",  # TODO REMOVE
+           "${module.ecs_cluster.security_group_id}"]
 }
 
 // Security group for external ELBs.
@@ -324,6 +330,6 @@ output "internal_security_groups" {
   value = ["${module.security_groups.internal_elb}",
            "${module.security_groups.external_elb}",
            "${module.security_groups.internal_ssh}",
-           "${module.security_groups.external_ssh}",
+           "${module.security_groups.external_ssh}",  # TODO REMOVE
            "${module.ecs_cluster.security_group_id}"]
 }
