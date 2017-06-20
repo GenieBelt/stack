@@ -189,3 +189,7 @@ output "internal_elb" {
 output "external_elb" {
   value = "${aws_security_group.external_elb.id}"
 }
+
+output "redis_access" {
+  value = "${aws_security_group.redis_access.id}"
+}
