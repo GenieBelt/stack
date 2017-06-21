@@ -150,7 +150,7 @@ resource "aws_security_group" "redis_access" {
     from_port       = 6379
     to_port         = 6379
     protocol        = "tcp"
-    security_groups = ["${aws_security_group.redis_access.id}"]
+    security_groups = "${module.stack.internal_security_groups}"
   }
 
   egress {
