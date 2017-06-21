@@ -141,35 +141,6 @@ resource "aws_security_group" "internal_ssh" {
   }
 }
 
-resource "aws_security_group" "redis_access" {
-  name        = "${format("%s-%s-redis-access", var.name, var.environment)}"
-  description = "Allows access to redis/elasticache"
-  vpc_id      = "${var.vpc_id}"
-
-  ingress {
-    from_port       = 6379
-    to_port         = 6379
-    protocol        = "tcp"
-    security_groups = "${module.stack.internal_security_groups}"
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "tcp"
-    cidr_blocks = ["${var.cidr}"]
-  }
-
-  lifecycle {
-    create_before_destroy = true
-  }
-
-  tags {
-    Name        = "${format("%s internal redis-access", var.name)}"
-    Environment = "${var.environment}"
-  }
-}
-
 // External SSH allows ssh connections on port 22 from the world.
 output "external_ssh" {
   value = "${aws_security_group.external_ssh.id}"
@@ -188,8 +159,4 @@ output "internal_elb" {
 // External ELB allows traffic from the world.
 output "external_elb" {
   value = "${aws_security_group.external_elb.id}"
-}
-
-output "redis_access" {
-  value = "${aws_security_group.redis_access.id}"
 }
